@@ -64,7 +64,7 @@ const App = () => {
             // this means we are editing the event
             let eventDate = values.event_date.second(0).minute(0).hour(0)
             let event_data = {
-                ...values,
+              'user_id': loggedInUser.id,
                 'name': values.name,
                 'nickname': values.nickname,
                 'event_type': values.occasion,

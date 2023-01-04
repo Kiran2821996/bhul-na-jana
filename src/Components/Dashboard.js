@@ -17,14 +17,19 @@ const Dashboard = (props) => {
     marginBottom: "10px",
   };
 
-  // const handleEditClick = (event_id) => {
-  //   navigate("/edit-event/" + event_id);
-  //   props.setSelectedKeys(["add-event"]);
-  // };
+  const handleEditClick = (event_id) => {
+    navigate("/edit-event/" + event_id);
+    props.setSelectedKeys(["add-event"]);
+  };
 
   const handleDeleteClick = (event_id) => {
     console.log(event_id, "lll");
-    dispatch(eventActions.deleteEvent(event_id));
+    events.map(event=>{
+      if(parseInt(event.id)===parseInt(event_id)){
+        dispatch(eventActions.deleteEvent(event));
+      }
+    })
+   
   };
 
   return (
@@ -45,9 +50,9 @@ const Dashboard = (props) => {
                       style={cardHeaderStyle}
                       extra={
                         <>
-                          {/* <Button onClick={() => handleEditClick(event.id)}>
+                          <Button onClick={() => handleEditClick(event.id)}>
                             Edit
-                          </Button>{" "} */}
+                          </Button>{" "}
                           <Button onClick={() => handleDeleteClick(event.id)}>
                             Delete
                           </Button>

@@ -15,22 +15,30 @@ const eventSlice = createSlice({
             localStorage.setItem('events', JSON.stringify(updatedEvents))
             state.events = updatedEvents
         },
-        // 'updateEvent': (state, action) => {
-        //     // console.log('updateEvent', action.payload)
-        //     let updatedEvent = action.payload
-        //     let newEvents = state.events.map((e) => {
-        //         if(parseInt(e.id) === parseInt(updatedEvent.id)){
-        //             return updatedEvent
-        //         }
-        //     })
-        //     console.log({newEvents})
-        //     localStorage.setItem('events', JSON.stringify(newEvents))
-        //     state.events = newEvents
-        // },
+        'updateEvent': (state, action) => {
+            // console.log('updateEvent', action.payload)
+            let updatedEvent = action.payload
+            let newEvents = state.events.map((e) => {
+                if(parseInt(e.id) === parseInt(updatedEvent.id)){
+                    return updatedEvent
+                }else{
+                    return e
+                }
+            })
+            console.log({newEvents})
+            localStorage.setItem('events', JSON.stringify(newEvents))
+            state.events = newEvents
+        },
         'deleteEvent': (state, action) => {
-            // console.log('deleteEvent', action.payload)
+            console.log('deleteEvent', action.payload)
             let deleteEvent = action.payload
-            let newEvents = state.events.map((e,i) => parseInt(e.id)===deleteEvent && state.events.splice(i,1) )
+            let newEvents = state.events.map((e) =>{
+             if(parseInt(e.id)===parseInt(deleteEvent.id)) {
+                state.events.splice(state.events.indexOf(e),1)
+             }else{
+                return e
+            }
+            } )
             let updatedEvents = [...state.events,newEvents]
             localStorage.setItem('events', JSON.stringify(updatedEvents))
             state.events = updatedEvents
