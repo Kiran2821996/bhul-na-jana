@@ -20,14 +20,15 @@ const eventSlice = createSlice({
             let updatedEvent = action.payload
             let newEvents = state.events.map((e) => {
                 if(parseInt(e.id) === parseInt(updatedEvent.id)){
-                    return updatedEvent
+                    state.events.splice(state.events.indexOf(e),1,updatedEvent)
                 }else{
                     return e
                 }
             })
-            console.log({newEvents})
-            localStorage.setItem('events', JSON.stringify(newEvents))
-            state.events = newEvents
+           
+            let updatedEvents = [...state.events, newEvents]
+            localStorage.setItem('events', JSON.stringify(updatedEvents))
+            state.events = updatedEvents
         },
         'deleteEvent': (state, action) => {
             console.log('deleteEvent', action.payload)

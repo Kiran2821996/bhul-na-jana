@@ -35,7 +35,13 @@ const Dashboard = (props) => {
   return (
     <>
     <h4>Events</h4>
-    {console.log(events,"events")}
+    {/* {console.log(events,"events")} */}
+    {/* {events.flat(1).map(itm=>{
+      if(itm === null){
+        events.splice(itm,1)
+      }
+      console.log(events,"events")
+    })} */}
       <div className="site-card-wrapper">
         <Row gutter={16}>
           {events &&
